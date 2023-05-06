@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+URL::forceScheme('https');  //at the top of the file
 Route::redirect('/', '/login');
 
 /* Route::get('/', function () {
@@ -40,7 +41,7 @@ Route::get('/dashboard', function () {
                 'cantidad_devuelto' =>  $pedido->cantidad_devuelto,
                 'cantidad_pedido' => $pedido->cantidad_pedido,
                 'fecha' => $pedido->fecha_inicio->format('d-m-Y'),
-                
+
 
             ];
         }), 
