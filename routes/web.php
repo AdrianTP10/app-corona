@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-URL::forceScheme('https');  //at the top of the file
+//URL::forceScheme('https');  //at the top of the file
 Route::redirect('/', '/login');
 
 /* Route::get('/', function () {
