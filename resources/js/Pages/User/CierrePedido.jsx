@@ -64,7 +64,7 @@ function CierrePedido({ auth, pedido }) {
                             onChange={(e) =>
                                 setData("cantidad_devuelto", e.target.value)
                             }
-                            className="w-full text-lg"
+                            className="w-full text-lg mt-2"
                         ></TextInput>
                         <InputError
                             message={errors.cantidad_devuelto}
@@ -75,13 +75,13 @@ function CierrePedido({ auth, pedido }) {
                                 Cancelar
                             </Link> */}
                        <PrimaryButton
-                            className="mt-4 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
+                            className="mt-8 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
                             disabled={proccesing}
                         >
                             Confirmar entrega
                         </PrimaryButton>
 
-                        <div>
+                        {/* <div>
                             <Modal
                                 show={showingModal}
                                 size="md"
@@ -114,7 +114,7 @@ function CierrePedido({ auth, pedido }) {
                                     </div>
                                 </Modal.Body>
                             </Modal>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
             </div>
