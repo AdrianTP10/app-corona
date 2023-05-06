@@ -29,11 +29,12 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="mt-6 space-y-6 ">
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
                     <TextInput
+                        disabled={true}
                         id="name"
                         className="mt-1 block w-full"
                         value={data.name}
@@ -50,6 +51,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
+                        disabled={true}
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
@@ -85,7 +87,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    {/* <PrimaryButton disabled={processing}>Save</PrimaryButton> */}
 
                     <Transition
                         show={recentlySuccessful}
