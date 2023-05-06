@@ -56,7 +56,7 @@ function RegistroPedido({ auth, rutas }) {
               onChange={(e) =>
                   setData("cantidad_pedido", e.target.value)
               }
-              className="w-full text-lg"
+              className="w-full text-lg mt-2"
             >
             </TextInput>
             <InputError
@@ -64,12 +64,12 @@ function RegistroPedido({ auth, rutas }) {
               className="mt-2"
             />
 
-            <InputLabel>Ruta</InputLabel>
+            <InputLabel >Ruta</InputLabel>
             <select
               defaultValue={999}
               id="rutas"
               onChange={(e) => setData("nombre", e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-700 focus:border-blue-700 block w-full p-2.5"
+              className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-700 focus:border-blue-700 block w-full p-2.5"
             >
               <option value={999}>Seleciona una ruta</option>
               {rutas.map((ruta) => (
@@ -91,7 +91,7 @@ function RegistroPedido({ auth, rutas }) {
                 Cancelar
             </Link> */}
             <PrimaryButton
-                className="mt-4 text-white  hover:bg-indigo-700 font-medium rounded-lg  mb-2"
+                className="mt-8 text-white  hover:bg-indigo-700 font-medium rounded-lg  mb-2"
                 disabled={proccesing}
             >
                 Comenzar Entrega

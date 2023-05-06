@@ -7,6 +7,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import InputLabel from "@/Components/InputLabel";
+import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
 
 import TextInput from "@/Components/TextInput";
 function CierrePedido({ auth, pedido }) {
@@ -34,9 +35,14 @@ function CierrePedido({ auth, pedido }) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Registrar entrega
-                </h2>
+                <>
+                    <Link href={route('dashboard')}>
+                    <ChevronDoubleLeftIcon className="h-6 w-6 text-gray-500" />
+                    </Link>
+                    <div>
+                    Registrar Entrega
+                    </div>
+                </>
             }
         >
             <Head title="Dashboard" />

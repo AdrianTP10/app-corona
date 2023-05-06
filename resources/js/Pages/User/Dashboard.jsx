@@ -4,7 +4,9 @@ import {Timeline} from 'flowbite-react';
 import { CalendarIcon, ArrowLongRightIcon } from "@heroicons/react/24/solid";;
 
 export default function Dashboard({ auth, pedidos }) {
+    
     return (
+       
         <AuthenticatedLayout
             user={auth.user}
             header={
@@ -22,7 +24,9 @@ export default function Dashboard({ auth, pedidos }) {
                     <Timeline>
                         {
                             pedidos.map((pedido) => (
+                                
                                 <Timeline.Item key={pedido.id.toString()}>
+                                    {console.log(pedido.editable)}
                                     <Timeline.Point icon={CalendarIcon} />
                                     <Timeline.Content>
                                         <Timeline.Time className="text-lg dark:text-white">{pedido.fecha}</Timeline.Time>
@@ -41,7 +45,8 @@ export default function Dashboard({ auth, pedidos }) {
                                         </p>
                                         </Timeline.Body>
                                         <Link 
-                                            className='flex bg-white rounded-lg p-2 items-center border-gray-300 border'
+                                            className={pedido.editable ? 'hidden'  :'flex bg-white rounded-lg p-2 w1/3 sm:w-1/4  items-center border-gray-300 border'}
+                                            href={route('pedidos.edit',pedido.id)}
                                         >
                                             Continuar Entrega
                                             <ArrowLongRightIcon className="ml-2 h-3 w-3" />
@@ -55,7 +60,7 @@ export default function Dashboard({ auth, pedidos }) {
                 
                 <Link
                     href={route("pedidos.create")}
-                    className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                    className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
                 >
                     Registrar Entrega
                 </Link>

@@ -34,15 +34,14 @@ Route::redirect('/', '/login');
 
 Route::get('/dashboard', function () {
     return Inertia::render('User/Dashboard', [
-        'pedidos' => Pedido::where('user_id', Auth::id())->get()->map(function ($pedido) {
+        'pedidos' => Pedido::where('user_id', Auth::id())->orderBy('id', 'desc')->get()->map(function ($pedido) {
             return [
                 'id' => $pedido->id,
                 'ruta' => $pedido->ruta->nombre,
                 'cantidad_devuelto' =>  $pedido->cantidad_devuelto,
                 'cantidad_pedido' => $pedido->cantidad_pedido,
                 'fecha' => $pedido->fecha_inicio->format('d-m-Y'),
-
-
+                'editable' => $pedido->fecha_cierre != null,
             ];
         }), 
 
