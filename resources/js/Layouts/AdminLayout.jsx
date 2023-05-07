@@ -7,32 +7,44 @@ import { Link } from '@inertiajs/react';
 
 
 
-export default function Authenticated({ user, header, children}) {
+export default function AdminLayout({ user, header, children}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     
     return (
-        <div className="flex flex-col min-h-screen max-w-screen bg-[#e3f0fa] ">
+        <div className="flex flex-col min-h-screen bg-[#e3f0fa] ">
             <nav className="bg-[#F5AF00] from-orange-700 via-amber-600 to-yellow-600 ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
+                                <Link href="/admin/pedidos">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
-                           
                             
-                           
                             
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <NavLink href='#' active={route().current('pedidos.create')}>
+                                Gestionar Rutas
+                            </NavLink>
+                            </div>
+                            
+
+                            
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <NavLink href="# "active={route().current('pedidos.create')}>
+                                Registar Repartidor
+                            </NavLink>
+                            </div>
+                           
                           
                         </div>
 
                         {/* Dropdown menu */}
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
                             <div className="ml-3 relative">
-                                <Dropdown >
+                                <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
@@ -58,8 +70,8 @@ export default function Authenticated({ user, header, children}) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Perfil</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
+                                        <Dropdown.Link  href={route('profile.edit')}>Perfil</Dropdown.Link>
+                                        <Dropdown.Link  href={route('logout')} method="post" as="button">
                                             Cerrar sesión
                                         </Dropdown.Link>
                                     </Dropdown.Content>

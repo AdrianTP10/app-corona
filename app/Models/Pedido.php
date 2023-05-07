@@ -18,6 +18,7 @@ class Pedido extends Model
         'user_id',
         'cantidad_devuelto',
         'cantidad_pedido',
+        'bdr',
     ];
     protected $attributes = [
         'cantidad_devuelto' => 0,

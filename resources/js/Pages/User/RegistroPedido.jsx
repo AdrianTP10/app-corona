@@ -12,8 +12,9 @@ import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
 
 import TextInput from "@/Components/TextInput";
 
-function RegistroPedido({ auth, rutas }) {
+function RegistroPedido({ auth, rutas}) {
   const { data, setData, post, proccesing, reset, errors } = useForm({
+    bdr: "",
     nombre: "",
     cantidad_pedido: "",
   });
@@ -29,47 +30,26 @@ function RegistroPedido({ auth, rutas }) {
       header={
         <>
           <Link href={route('dashboard')}>
-            <ChevronDoubleLeftIcon className="h-6 w-6 text-gray-500" />
+            <ChevronDoubleLeftIcon className="h-6 w-6 text-white" />
           </Link>
-          <div>
-          Registrar Entrega
+          <div className="text-white text-2xl font-bold">
+            Registrar Entrega
           </div>
         </>
       }
+     
     >
       <Head title="Dashboard" />
 
       <div className="py-12">
         <div className="w-2/3 sm:w-1/2 mx-auto sm:px-6 lg:px-8">
           <form onSubmit={submit}>
-            <InputLabel>Cajas del Pedido</InputLabel>
-              {/* <input 
-              value={data.descripcion}
-              onChange={e => setData('descripcion', e.target.value)}
-              type='text'
-              autoFocus
-              className="mb-3 block w-full border-gray-300 rounded-lg"
-              name="descripcion"
-              /> */}
-            <TextInput
-              type="number"
-              onChange={(e) =>
-                  setData("cantidad_pedido", e.target.value)
-              }
-              className="w-full text-lg mt-2"
-            >
-            </TextInput>
-            <InputError
-              message={errors.cantidad_pedido}
-              className="mt-2"
-            />
-
-            <InputLabel >Ruta</InputLabel>
+          <InputLabel  >Ruta</InputLabel>
             <select
               defaultValue={999}
               id="rutas"
               onChange={(e) => setData("nombre", e.target.value)}
-              className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-700 focus:border-blue-700 block w-full p-2.5"
+              className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-700 focus:border-blue-700 block w-full p-2.5"
             >
               <option value={999}>Seleciona una ruta</option>
               {rutas.map((ruta) => (
@@ -83,6 +63,45 @@ function RegistroPedido({ auth, rutas }) {
               ))}
             </select>
             <InputError message={errors.nombre} className="mt-2" />
+          
+          <InputLabel>BDR</InputLabel>
+            <TextInput
+              type="text"
+              
+              onChange={(e) =>
+                  setData("bdr", e.target.value)
+              }
+              className="w-full text-lg mt-2"
+            >
+            </TextInput>
+            <InputError
+              message={errors.bdr}
+              className="mt-2"
+            />
+            <InputLabel>Cajas del Pedido</InputLabel>
+              {/* <input 
+              value={data.descripcion}
+              onChange={e => setData('descripcion', e.target.value)}
+              type='text'
+              autoFocus
+              className="mb-3 block w-full border-gray-300 rounded-lg"
+              name="descripcion"
+              /> */}
+            <TextInput
+              type="number"
+              min = "1"
+              onChange={(e) =>
+                  setData("cantidad_pedido", e.target.value)
+              }
+              className="w-full text-lg mt-2"
+            >
+            </TextInput>
+            <InputError
+              message={errors.cantidad_pedido}
+              className="mt-2"
+            />
+
+            
 
             {/* <Link
                 href={route("pedidos.index")}
@@ -91,7 +110,7 @@ function RegistroPedido({ auth, rutas }) {
                 Cancelar
             </Link> */}
             <PrimaryButton
-                className="mt-8 text-white  hover:bg-indigo-700 font-medium rounded-lg  mb-2"
+                className="mt-8 text-white  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg  mb-2"
                 disabled={proccesing}
             >
                 Comenzar Entrega

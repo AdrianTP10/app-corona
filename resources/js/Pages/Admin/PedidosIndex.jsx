@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AdminLayout from "@/Layouts/AdminLayout";
 import { Head, Link } from "@inertiajs/react";
 import {Table} from 'flowbite-react'
 import * as XLSX from 'xlsx';
@@ -36,30 +36,33 @@ export default function Dashboard({ auth, pedidos }) {
 
    }
    return (
-      <AuthenticatedLayout
+      <AdminLayout
          user={auth.user}
          header={
-               <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                  Admin Panel
+               <h2 className="text-white text-2xl font-bold">
+                  Tabla de Pedidos
                </h2>
          }
+       
       >
          <Head title="Dashboard" />
 
          <div className=" relative py-12 min-h-full">
             <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
-               <Table hoverable={true}  striped={true} >
+               <button className="px-4 py-3 my-5 justify-self-end bg-[#215bac] border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-[#f9de81] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" onClick={generarArchivo}>Descargar</button>
+               <Table  className="overflow-x-scroll" hoverable={true}  striped={true} >
                   <Table.Head >
                         <Table.HeadCell className="text-base">Ruta</Table.HeadCell>
+                        <Table.HeadCell className="text-base">BDR</Table.HeadCell>
                         <Table.HeadCell className="text-base">Repartidor</Table.HeadCell>
                         <Table.HeadCell className="text-base">Fecha</Table.HeadCell>
                         <Table.HeadCell className="text-base">Cajas del Pedido</Table.HeadCell>
                         <Table.HeadCell className="text-base">Cajas Devueltas</Table.HeadCell>
                         <Table.HeadCell className="text-base">Tiempo de Entrega (Horas/minutos)</Table.HeadCell>
                         
-                        <Table.HeadCell>
+                        {/* <Table.HeadCell>
                            <span className="sr-only">Edit</span>
-                        </Table.HeadCell>
+                        </Table.HeadCell> */}
                   </Table.Head>
                   <Table.Body className="divide-y">
                      
@@ -69,6 +72,7 @@ export default function Dashboard({ auth, pedidos }) {
                               <Table.Cell className="whitespace-nowrap font-medium ">
                                  {pedido.ruta}
                               </Table.Cell>
+                              <Table.Cell>{pedido.bdr}</Table.Cell>
                               <Table.Cell>{pedido.repartidor}</Table.Cell>
                               <Table.Cell>{pedido.fecha}</Table.Cell>
                               <Table.Cell>{pedido.cantidad_pedido}</Table.Cell>
@@ -77,14 +81,14 @@ export default function Dashboard({ auth, pedidos }) {
                               
                               
                               
-                              <Table.Cell>
+                              {/* <Table.Cell>
                                  <a
                                        href="/tables"
                                        className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                                  >
                                        Edit
                                  </a>
-                              </Table.Cell>
+                              </Table.Cell> */}
                         </Table.Row>
                         ))
       
@@ -93,9 +97,9 @@ export default function Dashboard({ auth, pedidos }) {
                   </Table.Body>
                </Table>
 
-               <button className="p-3 bg-gray-200 rounded-lg mt-5" onClick={generarArchivo}>Descargar</button>
+              
             </div>
          </div>
-      </AuthenticatedLayout>
+      </AdminLayout>
    );
 }

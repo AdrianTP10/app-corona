@@ -10,25 +10,25 @@ import InputLabel from "@/Components/InputLabel";
 import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
 
 import TextInput from "@/Components/TextInput";
-function CierrePedido({ auth, pedido }) {
+function CierrePedido({ auth, pedido}) {
     const { data, setData, patch, proccesing, reset, errors } = useForm({
-        cantidad_devuelto: "",
+        cantidad_devuelto: "0",
     });
 
     const submit = (e) => {
-        setShowingModal(true)
-
         
         
+       
         e.preventDefault();
         patch(route("pedidos.update", pedido.id), { onSucces: () => reset() });
+        
+        
+        
+        
     };
 
-    const handleConfirmSubmit = () =>{
-        showingModal(false)
-        sub
-    }
-
+    
+    const [isConfirmed, setisConfirmed] = useState(false)
     const [showingModal, setShowingModal] = useState(false)
 
     return (
@@ -37,13 +37,14 @@ function CierrePedido({ auth, pedido }) {
             header={
                 <>
                     <Link href={route('dashboard')}>
-                    <ChevronDoubleLeftIcon className="h-6 w-6 text-gray-500" />
+                    <ChevronDoubleLeftIcon className="h-6 w-6 text-white" />
                     </Link>
-                    <div>
-                    Registrar Entrega
+                    <div className="text-white text-2xl font-bold">
+                        Atención a devoluciones
                     </div>
                 </>
             }
+           
         >
             <Head title="Dashboard" />
 
@@ -61,6 +62,9 @@ function CierrePedido({ auth, pedido }) {
                                 /> */}
                         <TextInput
                             type="number"
+                            min="0"
+                            max={parseInt(pedido.cantidad_pedido)}
+                            value={data.cantidad_devuelto}
                             onChange={(e) =>
                                 setData("cantidad_devuelto", e.target.value)
                             }
@@ -75,46 +79,44 @@ function CierrePedido({ auth, pedido }) {
                                 Cancelar
                             </Link> */}
                        <PrimaryButton
-                            className="mt-8 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
+                            className="mt-8 text-white  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg mr-2 mb-2"
                             disabled={proccesing}
                         >
-                            Confirmar entrega
+                            Finalizar entrega
                         </PrimaryButton>
 
-                        {/* <div>
-                            <Modal
-                                show={showingModal}
-                                size="md"
-                                popup={true}
-                                onClose={() => setShowingModal(false)} 
+                       {/*  <Modal
+                            show={isConfirmed}
+                            size="md"
+                            popup={true}
+                            onClose={() => setShowingModal(false)} 
                             >
-                                <Modal.Header />
-                                <Modal.Body>
-                                    <div className="text-center">
-                                        <ExclamationCircleIcon className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-                                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                            ¿Deseas confirmar la entrega?
-                                        </h3>
-                                        <div className="flex justify-center gap-4">
-                                            <Button
-                                                className="mt-4 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
-                                                disabled={proccesing}
-                                                onClick={handleConfirmSubmit}
-                                            >
-                                                Confirmar entrega
-                                            </Button> 
+                            <Modal.Header />
+                            <Modal.Body>
+                                <div className="text-center">
+                                    <ExclamationCircleIcon className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                                    <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                        ¿Deseas confirmar la entrega?
+                                    </h3>
+                                    <div className="flex justify-center gap-4">
+                                        <Button
+                                            className="mt-4 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
+                                            disabled={proccesing}
+                                            onClick={() =>setisConfirmed(true)}
+                                        >
+                                            Confirmar entrega
+                                        </Button> 
 
-                                            <Button
-                                                color="gray"
-                                                onClick={() => setShowingModal(false)} 
-                                            >
-                                                No, cancelar
-                                            </Button>
-                                            </div>
-                                    </div>
-                                </Modal.Body>
-                            </Modal>
-                        </div> */}
+                                        <Button
+                                            color="gray"
+                                            onClick={() => setShowingModal(false)} 
+                                        >
+                                            No, cancelar
+                                        </Button>
+                                        </div>
+                                </div>
+                            </Modal.Body>
+                        </Modal> */}
                     </form>
                 </div>
             </div>

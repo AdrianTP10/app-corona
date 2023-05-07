@@ -44,6 +44,11 @@ Route::get('/dashboard', function () {
                 'editable' => $pedido->fecha_cierre != null,
             ];
         }), 
+        'can' =>[
+            'gestion_pedidos' => Auth::user()->hasPermissionTo('gestionar pedidos'),
+            'gestion_usuarios' => Auth::user()->hasPermissionTo('gestionar usuarios'),
+            'gestion_rutas' => Auth::user()->hasPermissionTo('gestionar rutas'),
+        ]
 
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');

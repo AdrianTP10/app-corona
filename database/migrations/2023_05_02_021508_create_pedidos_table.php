@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained(
                 table: 'users', indexName: 'pedidos_users_id'
             );
+            $table->string('bdr',30);
             $table->timestamp('fecha_inicio');
             $table->dateTime('fecha_cierre')->nullable();
             $table->integer('cantidad_devuelto');

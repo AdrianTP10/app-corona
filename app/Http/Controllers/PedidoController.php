@@ -17,16 +17,20 @@ class PedidoController extends Controller
     public function index()
     {
         return Inertia::render('Admin/PedidosIndex', [
-            'pedidos' => Pedido::where('user_id', Auth::id())->get()->map(function ($pedido) {
+            'pedidos' => Pedido::all()->map(function ($pedido) {
                 $intervalo = $pedido->fecha_inicio->diff($pedido->fecha_cierre);
                 return [
                     'id' => $pedido->id,
+                    
                     'ruta' => $pedido->ruta->nombre,
+                    'bdr' => $pedido->bdr,
                     'repartidor' => $pedido->repartidor->name,
                     'cantidad_devuelto' =>  $pedido->cantidad_devuelto,
                     'cantidad_pedido' => $pedido->cantidad_pedido,
                     'fecha' => $pedido->fecha_inicio->format('d-m-Y h:iA'),
                     'tiempo' => $intervalo->format('%H:%I'),
+                    
+                    
                 ];
             }), 
     
@@ -41,8 +45,9 @@ class PedidoController extends Controller
     public function create()
     {
         return Inertia::render('User/RegistroPedido', [
-            'rutas' => Ruta::all()
-        ]);
+            'rutas' => Ruta::all(),
+            
+         ]);
     }
 
     /**
@@ -56,14 +61,15 @@ class PedidoController extends Controller
     
         $request->validate([
             'nombre' => ['required', 'max:10','exists:rutas'],
-            'cantidad_pedido' => ['required', 'integer'],
+            'cantidad_pedido' => ['required', 'integer','min:1'],
+            'bdr' => ['required', 'string','max:30'],
         ]);
         $ruta = Ruta::firstWhere('nombre', $request->nombre);
         $pedido = new Pedido();
         $pedido->cantidad_pedido = $request->cantidad_pedido;
         $pedido->ruta_id = $ruta->id;
         $pedido->user_id = Auth::id();
-        //$pedido->fecha_inicio = now();
+        $pedido->bdr = $request->bdr;
         $pedido->save();
         
 
@@ -74,7 +80,9 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         return Inertia::render('User/CierrePedido', [
-           'pedido' => $pedido
+           'pedido' => $pedido,
+           
+          
         ]);
     }
 

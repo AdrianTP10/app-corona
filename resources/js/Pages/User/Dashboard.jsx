@@ -1,19 +1,24 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import {Timeline} from 'flowbite-react';
-import { CalendarIcon, ArrowLongRightIcon } from "@heroicons/react/24/solid";;
+import { ArrowLongRightIcon } from "@heroicons/react/24/solid";;
+import { CubeIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
-export default function Dashboard({ auth, pedidos }) {
+
+
+export default function Dashboard({ auth, pedidos, can}) {
     
     return (
        
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Bienvenido
+                <h2 className="flex text-2xl items-center overflow-x-hidden max-w-full font-bold text-white leading-tight">
+                    Bienvenido <ChevronRightIcon className="h-5 w-6 stroke-2 text-white" />   {auth.user.name}
                 </h2>
             }
+            can={can}
         >
             <Head title="Dashboard" />
             {/*  {pedidos.length <= 0 && (
@@ -26,26 +31,26 @@ export default function Dashboard({ auth, pedidos }) {
                             pedidos.map((pedido) => (
                                 
                                 <Timeline.Item key={pedido.id.toString()}>
-                                    {console.log(pedido.editable)}
-                                    <Timeline.Point icon={CalendarIcon} />
+                                    
+                                    <Timeline.Point  icon={CubeIcon} />
                                     <Timeline.Content>
-                                        <Timeline.Time className="text-lg dark:text-white">{pedido.fecha}</Timeline.Time>
-                                        <h1 className="text-lg dark:text-white">
+                                        <Timeline.Time ><h1 className="text-xl ">{pedido.fecha} </h1></Timeline.Time>
+                                        <h1 className="text-xl font-bold ">
                                             Pedido {pedido.id}
                                         </h1>
                                         <Timeline.Body>
-                                        <p className="font-normal text-gray-700 dark:text-white ">
-                                            Ruta: {pedido.ruta}
-                                        </p>
-                                        <p className="font-normal text-gray-700 dark:text-white">
-                                            Cantidad Pedido: {pedido.cantidad_pedido}
-                                        </p>
-                                        <p className="font-normal text-gray-700 dark:text-white">
-                                            Cantidad Devuelto: {pedido.cantidad_devuelto}
-                                        </p>
+                                            <p className="text-xl text-gray-700 ">
+                                                Ruta: {pedido.ruta}
+                                            </p>
+                                            <p className="text-xl text-gray-700 ">
+                                                Cantidad Pedido: {pedido.cantidad_pedido}
+                                            </p>
+                                            <p className="text-xl text-gray-700 ">
+                                                Cantidad Devuelto: {pedido.cantidad_devuelto}
+                                            </p>
                                         </Timeline.Body>
                                         <Link 
-                                            className={pedido.editable ? 'hidden'  :'flex bg-white rounded-lg p-2 w1/3 sm:w-1/4  items-center border-gray-300 border'}
+                                            className={pedido.editable ? 'hidden'  :'flex bg-white rounded-lg p-2 w-5/6 md:w-2/3 lg:w-1/3 text-lg items-center border-gray-300 border'}
                                             href={route('pedidos.edit',pedido.id)}
                                         >
                                             Continuar Entrega
@@ -60,7 +65,7 @@ export default function Dashboard({ auth, pedidos }) {
                 
                 <Link
                     href={route("pedidos.create")}
-                    className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+                    className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white text-xl font-bold py-2 px-4 rounded-md"
                 >
                     Registrar Entrega
                 </Link>
