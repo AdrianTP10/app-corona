@@ -7,18 +7,18 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 
 
-export default function Dashboard({ auth, pedidos, can}) {
+export default function Dashboard({ auth, pedidos}) {
     
     return (
        
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="flex text-2xl items-center overflow-x-hidden max-w-full font-bold text-white leading-tight">
+                <h2 className="flex text-2xl items-center overflow-x-hidden max-w-full font-bold text-white ">
                     Bienvenido <ChevronRightIcon className="h-5 w-6 stroke-2 text-white" />   {auth.user.name}
                 </h2>
             }
-            can={can}
+            
         >
             <Head title="Dashboard" />
             {/*  {pedidos.length <= 0 && (

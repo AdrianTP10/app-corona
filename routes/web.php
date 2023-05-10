@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\RutasController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,11 +45,6 @@ Route::get('/dashboard', function () {
                 'editable' => $pedido->fecha_cierre != null,
             ];
         }), 
-        'can' =>[
-            'gestion_pedidos' => Auth::user()->hasPermissionTo('gestionar pedidos'),
-            'gestion_usuarios' => Auth::user()->hasPermissionTo('gestionar usuarios'),
-            'gestion_rutas' => Auth::user()->hasPermissionTo('gestionar rutas'),
-        ]
 
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -65,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/admin/pedidos', PedidoController::class)->only(['index'])->names('admin.pedidos');
+    Route::resource('/admin/rutas', RutasController::class)->names('admin.rutas');
     Route::resource('/pedidos', PedidoController::class);
 });
 

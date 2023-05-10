@@ -18,9 +18,11 @@ function CierrePedido({ auth, pedido}) {
     const submit = (e) => {
         
         
-       
         e.preventDefault();
+       if(isConfirmed) {
+        
         patch(route("pedidos.update", pedido.id), { onSucces: () => reset() });
+       }
         
         
         
@@ -78,45 +80,48 @@ function CierrePedido({ auth, pedido}) {
                         {/* <Link href={route('pedidos.index')} className="mt-4 font-semibold text-xs text-white bg-red-600 hover:bg-red-700 rounded-md mr-2 mb-2 px-4 py-2 uppercase">
                                 Cancelar
                             </Link> */}
-                       <PrimaryButton
+                       {/* <PrimaryButton
                             className="mt-8 text-white  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg mr-2 mb-2"
                             disabled={proccesing}
                         >
                             Finalizar entrega
-                        </PrimaryButton>
+                        </PrimaryButton> */}
+                        <button  onClick={() => setShowingModal(true)} className="mt-8 text-white bg-indigo-500 p-3  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg mr-2 mb-2">
+                            Finalizar entrega
+                        </button>
 
-                       {/*  <Modal
-                            show={isConfirmed}
-                            size="md"
-                            popup={true}
-                            onClose={() => setShowingModal(false)} 
-                            >
-                            <Modal.Header />
-                            <Modal.Body>
-                                <div className="text-center">
-                                    <ExclamationCircleIcon className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-                                    <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                        ¿Deseas confirmar la entrega?
-                                    </h3>
-                                    <div className="flex justify-center gap-4">
-                                        <Button
-                                            className="mt-4 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
-                                            disabled={proccesing}
-                                            onClick={() =>setisConfirmed(true)}
-                                        >
-                                            Confirmar entrega
-                                        </Button> 
+                    <Modal
+                        show={showingModal}
+                        size="md"
+                        popup={true}
+                        onClose={() => setShowingModal(false)} 
+                        >
+                        <Modal.Header />
+                        <Modal.Body>
+                            <div className="text-center">
+                                <ExclamationCircleIcon className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                    ¿Deseas confirmar la entrega?
+                                </h3>
+                                <div className="flex justify-center gap-4">
+                                    <Button
+                                        className="mt-4 text-white  hover:bg-indigo-700 font-medium rounded-lg mr-2 mb-2"
+                                        disabled={proccesing}
+                                        onClick={() =>setisConfirmed(true)}
+                                    >
+                                        Confirmar entrega
+                                    </Button> 
 
-                                        <Button
-                                            color="gray"
-                                            onClick={() => setShowingModal(false)} 
-                                        >
-                                            No, cancelar
-                                        </Button>
-                                        </div>
-                                </div>
-                            </Modal.Body>
-                        </Modal> */}
+                                    <Button
+                                        color="gray"
+                                        onClick={() => setShowingModal(false)} 
+                                    >
+                                        No, cancelar
+                                    </Button>
+                                    </div>
+                            </div>
+                        </Modal.Body>
+                    </Modal> 
                     </form>
                 </div>
             </div>

@@ -46,5 +46,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getRedirectRoute()
+    {
+        return match($this->getRoleNames()->first()) {
+            'admin' => 'admin.pedidos.index',
+            'bdr' => 'dashboard',
+            
+            // ...
+        };
+    }
    
 }

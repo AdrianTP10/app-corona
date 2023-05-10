@@ -25,7 +25,7 @@ export default function AdminLayout({ user, header, children}) {
                             
                             
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <NavLink href='#' active={route().current('pedidos.create')}>
+                            <NavLink href={route('admin.rutas.index')} active={route().current('admin.rutas.index')}>
                                 Gestionar Rutas
                             </NavLink>
                             </div>
