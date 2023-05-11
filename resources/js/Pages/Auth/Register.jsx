@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
+import AdminLayout from '@/Layouts/AdminLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Register() {
+export default function Register({auth}) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
-        email: '',
+        username: '',
         password: '',
         password_confirmation: '',
     });
@@ -27,12 +27,21 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Register" />
+        <AdminLayout
+            user={auth.user}
+            header={
+                <h2 className="text-white text-2xl font-bold">
+                    Registrar Repartidor
+                </h2>
+            }
+        >
+            <Head title="Registrar Repartidor" />
 
-            <form onSubmit={submit}>
+            <div className="py-12">
+                <div className="w-2/3 sm:w-1/2 mx-auto sm:px-6 lg:px-8">
+                    <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="Nombre" />
 
                     <TextInput
                         id="name"
@@ -49,24 +58,24 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="username" value="Código/Usuario" />
 
                     <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
+                        id="username"
+                        type="username"
+                        name="username"
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData('username', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.username} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="Contraseña" />
 
                     <TextInput
                         id="password"
@@ -83,7 +92,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                    <InputLabel htmlFor="password_confirmation" value="Confirmar Contraseña" />
 
                     <TextInput
                         id="password_confirmation"
@@ -100,18 +109,21 @@ export default function Register() {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Link
+                   {/*  <Link
                         href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Already registered?
-                    </Link>
+                    </Link> */}
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Register
+                        Registrar
                     </PrimaryButton>
                 </div>
-            </form>
-        </GuestLayout>
+                    </form>
+                </div>
+            </div>
+           
+        </AdminLayout>
     );
 }

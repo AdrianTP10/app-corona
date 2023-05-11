@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\RutasController;
+use App\Http\Controllers\RepartidorController;
+use App\Http\Controllers\RutaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -61,7 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/admin/pedidos', PedidoController::class)->only(['index'])->names('admin.pedidos');
-    Route::resource('/admin/rutas', RutasController::class)->names('admin.rutas');
+    Route::resource('/admin/rutas', RutaController::class)->names('admin.rutas');
+    Route::resource('/admin/repartidores', RepartidorController::class)->names('admin.repartidores');
     Route::resource('/pedidos', PedidoController::class);
 });
 

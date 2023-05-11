@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rutas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',10);
+            $table->string('nombre',10)->unique();
             $table->timestamps();
         });
     }

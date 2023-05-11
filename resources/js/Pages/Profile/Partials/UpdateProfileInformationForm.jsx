@@ -10,7 +10,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
-        email: user.email,
+        username: user.username,
     });
 
     const submit = (e) => {
@@ -22,11 +22,11 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
+                <h2 className="text-lg font-medium text-gray-900">Información del Perfil</h2>
 
-                <p className="mt-1 text-sm text-gray-600">
+                {/* <p className="mt-1 text-sm text-gray-600">
                     Update your account's profile information and email address.
-                </p>
+                </p> */}
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6 ">
@@ -48,15 +48,15 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="username" value="Username" />
 
                     <TextInput
                         disabled={true}
-                        id="email"
+                        id="username"
                         type="email"
                         className="mt-1 block w-full"
-                        value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
+                        value={data.username}
+                        onChange={(e) => setData('username', e.target.value)}
                         required
                         autoComplete="username"
                     />

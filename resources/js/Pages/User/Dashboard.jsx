@@ -20,7 +20,7 @@ export default function Dashboard({ auth, pedidos}) {
             }
             
         >
-            <Head title="Dashboard" />
+            <Head title="Inicio" />
             {/*  {pedidos.length <= 0 && (
                 <div>No tienes pedidos</div>
             )} */}

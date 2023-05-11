@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ruta;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use Illuminate\Http\Request;
-
-class RutasController extends Controller
+class RepartidorController extends Controller
 {
     public function __construct(){
         $this->middleware('role:admin');
@@ -17,8 +16,8 @@ class RutasController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/RutasIndex', [
-            'rutas' => Ruta::all(),
+        return Inertia::render('Admin/RepartidoresIndex', [
+            'repartidores' => User::role('bdr')->get(),
         ]);
     }
 
@@ -27,9 +26,7 @@ class RutasController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/RutasCreate', [
-            
-        ]);
+        return Inertia::render('Admin/RepartidoresCreate');
     }
 
     /**
@@ -43,7 +40,7 @@ class RutasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ruta $ruta)
+    public function show(User $user)
     {
         //
     }
@@ -51,7 +48,7 @@ class RutasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ruta $ruta)
+    public function edit(User $user)
     {
         //
     }
@@ -59,7 +56,7 @@ class RutasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ruta $ruta)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -67,7 +64,7 @@ class RutasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ruta $ruta)
+    public function destroy(User $user)
     {
         //
     }

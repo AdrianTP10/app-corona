@@ -25,6 +25,14 @@ class DatabaseSeeder extends Seeder
             'nombre' => 'GB418',
 
         ]);
+        DB::table('rutas')->insert([
+            'nombre' => 'GB420',
+
+        ]);
+        DB::table('rutas')->insert([
+            'nombre' => 'GB435',
+
+        ]);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

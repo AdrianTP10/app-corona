@@ -23,18 +23,23 @@ export default function AdminLayout({ user, header, children}) {
                             </div>
 
                             
-                            
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <NavLink href={route('admin.pedidos.index')} active={route().current('admin.pedidos.index')}>
+                                Pedidos
+                            </NavLink>
+                            </div>
+
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink href={route('admin.rutas.index')} active={route().current('admin.rutas.index')}>
-                                Gestionar Rutas
+                                Rutas
                             </NavLink>
                             </div>
                             
 
                             
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <NavLink href="# "active={route().current('pedidos.create')}>
-                                Registar Repartidor
+                            <NavLink href={route('admin.repartidores.index')} active={route().current('admin.repartidores.index')}>
+                                Repartidores
                             </NavLink>
                             </div>
                            

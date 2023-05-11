@@ -45,11 +45,12 @@ export default function Dashboard({ auth, pedidos }) {
          }
        
       >
-         <Head title="Dashboard" />
+         <Head title="Pedidos" />
 
          <div className=" relative py-12 min-h-full">
             <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
                <button className="px-4 py-3 my-5 justify-self-end bg-[#215bac] border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-[#f9de81] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" onClick={generarArchivo}>Descargar</button>
+               
                <Table  className="overflow-x-scroll" hoverable={true}  striped={true} >
                   <Table.Head >
                         <Table.HeadCell className="text-base">Ruta</Table.HeadCell>
