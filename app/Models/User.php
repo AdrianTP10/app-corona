@@ -55,5 +55,10 @@ class User extends Authenticatable
             // ...
         };
     }
+
+    public function getRepartidores()
+    {
+        User::where('jefe_id',$this->id)->get();
+    }
    
 }

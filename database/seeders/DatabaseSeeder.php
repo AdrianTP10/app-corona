@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'nombre' => 'GB435',
 
         ]);
+        \App\Models\Pedido::factory(10000)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -1,14 +1,35 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-import {Timeline} from 'flowbite-react';
+import InputLabel from "@/Components/InputLabel";
+import InputError from "@/Components/InputError";
+import TextInput from "@/Components/TextInput";
+import PrimaryButton from "@/Components/PrimaryButton";
+import {Timeline,Modal, Button} from 'flowbite-react';
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid";;
 import { CubeIcon } from "@heroicons/react/24/outline";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Head, Link, useForm } from "@inertiajs/react";
+
+
+import { useState } from "react";
+
 
 
 
 export default function Dashboard({ auth, pedidos}) {
+    const [showingModal, setShowingModal] = useState(false)
+    const rutas = [
+        {id: '1', nombre: "BD534" }
+    ]
+    const { data, setData, post, proccesing, reset, errors } = useForm({
+        bdr: "",
+        nombre: "",
+        cantidad_pedido: "",
+      });
     
+    const submit = (e) => {
+        e.preventDefault();
+        //post(route("pedidos.store"), { onSucces: () => reset() });
+    };
     return (
        
         <AuthenticatedLayout
@@ -69,6 +90,87 @@ export default function Dashboard({ auth, pedidos}) {
                 >
                     Registrar Entrega
                 </Link>
+                {/* <button  onClick={() => setShowingModal(true)} className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white text-xl font-bold py-2 px-4 rounded-md">
+                    Registrar Entrega
+                </button> */}
+
+               {/*  <Modal
+                    show={showingModal}
+                    size="md"
+                    popup={true}
+                    onClose={() => setShowingModal(false)} 
+                    >
+                    <Modal.Header />
+                    <Modal.Body>
+                        <div className="text-center">
+                            <form onSubmit={submit}>
+                                <InputLabel  >Ruta</InputLabel>
+                                    <select
+                                    defaultValue={999}
+                                    id="rutas"
+                                    onChange={(e) => setData("nombre", e.target.value)}
+                                    className="bg-gray-50 border mt-2 border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-700 focus:border-blue-700 block w-full p-2.5"
+                                    >
+                                        <option value={999}>Seleciona una ruta</option>
+                                        {rutas.map((ruta) => (
+                                            <option
+                                                key={ruta.id.toString()}
+                                                value={ruta.id}
+                                                className="bg-gray-200"
+                                            >
+                                                {ruta.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <InputError message={errors.nombre} className="mt-2" />
+                                
+                                <InputLabel>BDR</InputLabel>
+                                    <TextInput
+                                    type="text"
+                                    
+                                    onChange={(e) =>
+                                        setData("bdr", e.target.value)
+                                    }
+                                    className="w-full text-lg mt-2"
+                                    >
+                                    </TextInput>
+                                    <InputError message={errors.bdr} className="mt-2"/>
+
+                                    <InputLabel>Cajas del Pedido</InputLabel>
+                                    <TextInput
+                                        type="number"
+                                        min = "1"
+                                        onChange={(e) =>
+                                            setData("cantidad_pedido", e.target.value)
+                                        }
+                                        className="w-full text-lg mt-2"
+                                    >
+                                    </TextInput>
+                                    <InputError message={errors.cantidad_pedido} className="mt-2"/>
+
+                
+
+                               
+                                
+                                <div className="flex justify-center gap-4">
+                                    <PrimaryButton
+                                        className="mt-8 text-white  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg  mb-2"
+                                        disabled={proccesing}
+                                    >
+                                        Comenzar Entrega
+                                    </PrimaryButton>
+
+                                    <Button
+                                        color="gray"
+                                        onClick={() => setShowingModal(false)} 
+                                    >
+                                        No, cancelar
+                                    </Button>
+                                </div>
+                            </form>  
+                        </div>
+                    </Modal.Body>
+                </Modal>  */}
               
             </div>
         </AuthenticatedLayout>

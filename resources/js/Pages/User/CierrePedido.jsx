@@ -25,7 +25,7 @@ function CierrePedido({ auth, pedido}) {
         
     };
 
-    
+    const [showingForm, setShowingForm] = useState(false)
     /* const [isConfirmed, setisConfirmed] = useState(false)
     const [showingModal, setShowingModal] = useState(false) */
 
@@ -46,38 +46,52 @@ function CierrePedido({ auth, pedido}) {
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
+            <div className="py-12 mt-24 ">
                 <div className="w-2/3 sm:w-1/2 mx-auto sm:px-6 lg:px-8">
+                    <div className="text-black text-center text-2xl font-bold w-full">
+                        ¿Se efectuó la devolución?
+                    </div>
+                    <div className="flex justify-between">
+                        <button
+                            className={`mt-8 w-1/2 text-white bg-[#215bac] px-4 py-3 text-sm  tracking-widest uppercase hover:bg-[#f9de81] hover:text-gray-600 font-semibold rounded-md mr-2 mb-2 ${showingForm && 'bg-[#f9de81]' } `}
+                            onClick={()=>setShowingForm(true)}
+                        >
+                            Si
+                        </button>
+                        <button
+                            className={`mt-8 w-1/2 text-white bg-[#215bac] px-4 py-3 text-sm  tracking-widest uppercase hover:bg-[#f9de81] hover:text-gray-600 font-semibold rounded-md mr-2 mb-2 ${!showingForm && 'bg-[#f9de81]'}`}
+                            onClick={()=>setShowingForm(false)}
+                        >
+                            No
+                        </button>
+                    </div>
+                    
+                   
                     <form onSubmit={submit}>
-                        <InputLabel>Cajas Devueltas</InputLabel>
-                        {/* <input 
-                                value={data.descripcion}
-                                onChange={e => setData('descripcion', e.target.value)}
-                                type='text'
-                                autoFocus
-                                className="mb-3 block w-full border-gray-300 rounded-lg"
-                                name="descripcion"
-                                /> */}
-                        <TextInput
-                            type="number"
-                            min="0"
-                            max={parseInt(pedido.cantidad_pedido)}
-                            value={data.cantidad_devuelto}
-                            onChange={(e) =>
-                                setData("cantidad_devuelto", e.target.value)
-                            }
-                            className="w-full text-lg mt-2"
-                        ></TextInput>
-                        <InputError
-                            message={errors.cantidad_devuelto}
-                            className="mt-2"
-                        />
+                        {showingForm &&
+                            <>
+                                <InputLabel>Cajas Devueltas</InputLabel>
+                                
+                                <TextInput
+                                    type="number"
+                                    min="0"
+                                    max={parseInt(pedido.cantidad_pedido)}
+                                    value={data.cantidad_devuelto}
+                                    onChange={(e) =>
+                                        setData("cantidad_devuelto", e.target.value)
+                                    }
+                                    className="w-full text-lg mt-2"
+                                ></TextInput>
+                                <InputError
+                                    message={errors.cantidad_devuelto}
+                                    className="mt-2"
+                                />
+                            </>
+                        }
 
-                        {/* <Link href={route('pedidos.index')} className="mt-4 font-semibold text-xs text-white bg-red-600 hover:bg-red-700 rounded-md mr-2 mb-2 px-4 py-2 uppercase">
-                                Cancelar
-                            </Link> */}
+                        
                         <PrimaryButton
-                            className="mt-8 text-white  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg mr-2 mb-2"
+                            className="absolute right-8 bottom-8 mt-8 text-white  hover:bg-[#f9de81] hover:text-gray-600 font-medium rounded-lg mr-2 mb-2"
                             disabled={proccesing}
                         >
                             Finalizar entrega
@@ -119,6 +133,7 @@ function CierrePedido({ auth, pedido}) {
                             </Modal.Body>
                         </Modal>  */}
                     </form>
+                    
                 </div>
             </div>
         </AuthenticatedLayout>

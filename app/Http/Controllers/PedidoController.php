@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Ruta;
+use Carbon\Carbon;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class PedidoController extends Controller
     public function index()
     {
         return Inertia::render('Admin/PedidosIndex', [
-            'pedidos' => Pedido::all()->map(function ($pedido) {
+            'pedidos' => Pedido::whereDate('fecha_inicio' ,'>=', Carbon::now()->subDay(15) )->get()->map(function ($pedido) {
                 $intervalo = $pedido->fecha_inicio->diff($pedido->fecha_cierre);
                 return [
                     'id' => $pedido->id,

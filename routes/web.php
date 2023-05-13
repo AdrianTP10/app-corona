@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Pedido;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::redirect('/', '/login');
 
 Route::get('/dashboard', function () {
     return Inertia::render('User/Dashboard', [
-        'pedidos' => Pedido::where('user_id', Auth::id())->orderBy('id', 'desc')->get()->map(function ($pedido) {
+        'pedidos' => Pedido::where('user_id', Auth::id())->whereDate('fecha_inicio' ,'>=', Carbon::now()->subDay(7) )->orderBy('id', 'desc')->get()->map(function ($pedido) {
             return [
                 'id' => $pedido->id,
                 'ruta' => $pedido->ruta->nombre,
