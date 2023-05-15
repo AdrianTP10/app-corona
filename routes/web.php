@@ -63,6 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/admin/pedidos', PedidoController::class)->only(['index'])->names('admin.pedidos');
+
+    Route::get('/admin/pedidos/reporte', [PedidoController::class, 'reporte'])->name('admin.pedidos.reporte');
+
     Route::resource('/admin/rutas', RutaController::class)->names('admin.rutas');
     Route::resource('/admin/repartidores', RepartidorController::class)->names('admin.repartidores');
     Route::resource('/pedidos', PedidoController::class);

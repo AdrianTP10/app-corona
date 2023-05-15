@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
         ]);
-        DB::table('rutas')->insert([
+        /* DB::table('rutas')->insert([
             'nombre' => 'GB409',
 
         ]);
@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         DB::table('rutas')->insert([
             'nombre' => 'GB435',
 
-        ]);
-        \App\Models\Pedido::factory(1000)->create();
+        ]); */
+       /*  \App\Models\Pedido::factory(1000)->create(); */
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

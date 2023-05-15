@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\PedidoExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PedidoController extends Controller
 {
@@ -17,8 +19,11 @@ class PedidoController extends Controller
      
     public function index()
     {
+     
         return Inertia::render('Admin/PedidosIndex', [
-            'pedidos' => Pedido::whereDate('fecha_inicio' ,'>=', Carbon::now()->subDay(15) )->get()->map(function ($pedido) {
+            //'pedidos' => Pedido::whereDate('fecha_inicio' ,'>=', Carbon::now()->subDay(15) )->get()->map(function ($pedido) {
+
+            'pedidos' => Pedido::where('fecha_cierre', '!=', NULL)->latest()->paginate(6)->through(function ($pedido) {
                 $intervalo = $pedido->fecha_inicio->diff($pedido->fecha_cierre);
                 return [
                     'id' => $pedido->id,
@@ -37,6 +42,12 @@ class PedidoController extends Controller
     
         ]);
     } 
+
+    public function reporte() 
+    {
+        return Excel::download(new PedidoExport, 'Pedidos '.Carbon::now()->format('d-m-Y').'.xlsx');
+        
+    }
 
     /**
      * Show the form for creating a new resource.

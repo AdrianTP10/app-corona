@@ -12,7 +12,7 @@ import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
 import TextInput from "@/Components/TextInput";
 function CierrePedido({ auth, pedido}) {
     const { data, setData, patch, proccesing, reset, errors } = useForm({
-        cantidad_devuelto: "0",
+        cantidad_devuelto: 0,
     });
 
     const submit = (e) => {
@@ -60,7 +60,7 @@ function CierrePedido({ auth, pedido}) {
                         </button>
                         <button
                             className={`mt-8 w-1/2 text-white bg-[#215bac] px-4 py-3 text-sm  tracking-widest uppercase hover:bg-[#f9de81] hover:text-gray-600 font-semibold rounded-md mr-2 mb-2 ${!showingForm && 'bg-[#f9de81]'}`}
-                            onClick={()=>setShowingForm(false)}
+                            onClick={()=>{setShowingForm(false); setData("cantidad_devuelto", 0)}}
                         >
                             No
                         </button>

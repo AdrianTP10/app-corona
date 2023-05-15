@@ -11,7 +11,7 @@ export default function AdminLayout({ user, header, children}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     
     return (
-        <div className="flex flex-col min-h-screen bg-[#e3f0fa] ">
+        <div className="flex flex-col h-screen max-h-screen overflow-hidden bg-[#e3f0fa] ">
             <nav className="bg-[#F5AF00] from-orange-700 via-amber-600 to-yellow-600 ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">

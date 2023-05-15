@@ -8,18 +8,18 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
 
-function RutasCreate({ auth}) {
-  const { data, setData, post, proccesing, reset, errors } = useForm({
-    nombre: "",
+function RutasEdit({ auth, ruta}) {
+  const { data, setData, patch, proccesing, reset, errors } = useForm({
+    nombre: ruta.nombre,
   });
 
   
   const submit = (e) => {
     e.preventDefault();
-    post(route("admin.rutas.store"), {
+    patch(route("admin.rutas.update",ruta.id), {
         preserveScroll: true,
         onSuccess: () => reset('nombre'),
-    })
+      })
   };
 
     return (
@@ -27,7 +27,7 @@ function RutasCreate({ auth}) {
             user={auth.user}
             header={
                 <h2 className="text-white text-2xl font-bold">
-                Registrar Ruta
+                    Editar Ruta
                 </h2>
             }
         >
@@ -56,7 +56,7 @@ function RutasCreate({ auth}) {
                     className="mt-8 text-white   hover:text-gray-600 font-medium rounded-lg  mb-2"
                     disabled={proccesing}
                 >
-                    Registrar Ruta
+                    Actualizar Ruta
                 </PrimaryButton>
 
             
@@ -67,4 +67,4 @@ function RutasCreate({ auth}) {
   );
 }
 
-export default RutasCreate;
+export default RutasEdit;

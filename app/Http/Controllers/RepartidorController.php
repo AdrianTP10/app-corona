@@ -48,17 +48,29 @@ class RepartidorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        
+        return Inertia::render('Admin/RepartidoresEdit', [
+            'repartidor' => User::find($id)
+        ]);
+
+    
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,$id)
     {
-        //
+        $user = User::find($id);
+        $validated = $request->validate([
+            'name' => 'required|string|max:45',
+            'username' => 'required|string|max:10|unique:'.User::class,
+        ]);
+        $user->update($validated);
+
+        return to_route('admin.repartidores.index');
     }
 
     /**

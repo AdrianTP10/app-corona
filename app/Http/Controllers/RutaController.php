@@ -18,7 +18,12 @@ class RutaController extends Controller
     public function index()
     {
         return Inertia::render('Admin/RutasIndex', [
-            'rutas' => Ruta::all(),
+            'rutas' => Ruta::paginate(10)->through(function ($ruta) {
+                return [
+                    'id' => $ruta->id,
+                    'nombre' => $ruta->nombre,
+                ];
+            }),
         ]);
     }
 
@@ -60,7 +65,9 @@ class RutaController extends Controller
      */
     public function edit(Ruta $ruta)
     {
-        //
+        return Inertia::render('Admin/RutasEdit', [
+            'ruta' => $ruta,
+        ]);
     }
 
     /**
@@ -68,7 +75,13 @@ class RutaController extends Controller
      */
     public function update(Request $request, Ruta $ruta)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => ['required', 'max:10','unique:rutas,nombre'],
+        ]);
+        $ruta->update($validated);
+
+        return to_route('admin.rutas.index');
+
     }
 
     /**
